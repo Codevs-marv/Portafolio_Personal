@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Citas Odontológicas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <h1>Agendar Cita</h1>
+  <form id="citaForm">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" required>
+    <label for="telefono">Teléfono:</label>
+    <input type="text" id="telefono" required>
+    <label for="servicio">Servicio:</label>
+    <select id="servicio" required>
+      <option value="Limpieza">Limpieza Dental</option>
+      <option value="Ortodoncia">Ortodoncia</option>
+    </select>
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" required>
+    <label for="hora">Hora:</label>
+    <input type="time" id="hora" required>
+    <button type="submit">Agendar</button>
+  </form>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
