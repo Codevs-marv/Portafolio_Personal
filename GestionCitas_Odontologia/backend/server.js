@@ -12,15 +12,14 @@ app.use(bodyParser.json());
 
 // Configuración de la base de datos SQL Server
 const dbConfig = {
-  user: 'tu_usuario',      // Reemplaza con tu usuario de SQL Server
-  password: 'tu_contraseña', // Reemplaza con tu contraseña
-  server: 'NITROMARV',      // O el nombre de tu servidor
+  server: 'NITROMARV',
   database: 'GestionCitas',
   options: {
-    encrypt: false,         // Ponlo en true si usas Azure
+    encrypt: false,         
     trustServerCertificate: true
   }
 };
+
 
 // Conectar a la base de datos
 sql.connect(dbConfig)
