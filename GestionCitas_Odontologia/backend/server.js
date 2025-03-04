@@ -12,19 +12,27 @@ app.use(bodyParser.json());
 
 // Configuración de la base de datos SQL Server
 const dbConfig = {
-  server: 'NITROMARV',
+  server: 'NITROMARV', 
   database: 'GestionCitas',
+  user: 'gestion_citas_user', 
+  password: 'GestionCitas321', 
   options: {
-    encrypt: false,         
+    encrypt: false, // Prueba con true si sigue fallando
     trustServerCertificate: true
   }
 };
 
-
 // Conectar a la base de datos
-sql.connect(dbConfig)
-  .then(() => console.log('✅ Conectado a SQL Server'))
-  .catch(err => console.error('❌ Error al conectar a SQL Server:', err));
+async function connectDB() {
+  try {
+    await sql.connect(dbConfig);
+    console.log('✅ Conectado a SQL Server');
+  } catch (err) {
+    console.error('❌ Error al conectar a SQL Server:', err);
+  }
+}
+
+connectDB();
 
 // Ruta de prueba
 app.get('/', (req, res) => {
@@ -36,11 +44,9 @@ app.post('/api/citas', async (req, res) => {
   try {
     const { nombre, telefono, servicio, fecha, hora } = req.body;
 
-    // Conectar a SQL Server
     const pool = await sql.connect(dbConfig);
     
-    // Insertar en la base de datos
-    const result = await pool.request()
+    await pool.request()
       .input('nombre', sql.NVarChar, nombre)
       .input('telefono', sql.NVarChar, telefono)
       .input('servicio', sql.NVarChar, servicio)
@@ -57,8 +63,6 @@ app.post('/api/citas', async (req, res) => {
     res.status(500).json({ mensaje: 'Error al agendar la cita' });
   }
 });
-
-
 
 // Iniciar servidor
 app.listen(port, () => {
